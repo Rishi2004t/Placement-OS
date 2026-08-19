@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Colors - Base/Surface */
+  --color-page: var(--page);
+  --color-elevated: var(--elevated);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+
+  /* Colors - Text */
+  --color-primary-text: var(--primary-text);
+  --color-secondary-text: var(--secondary-text);
+  --color-muted-text: var(--muted-text);
+
+  /* Colors - Accents & States */
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-text: var(--accent-text);
+  
+  --color-secondary: var(--secondary);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  
+  /* Radii */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+}
+
+:root {
+  /* 
+    Premium Placement SaaS aesthetic
+    Deep navy with blue/indigo accents
+  */
+  
+  /* Base/Surface */
+  --page: #070B14;          /* Deep navy background */
+  --elevated: #0B1020;      /* Elevated background */
+  --surface: #0E1422;       /* Surface */
+  --surface-hover: #111827; /* Surface hover */
+  --border: #1E293B;        /* Subtle blue-gray borders */
+
+  /* Text */
+  --primary-text: #F8FAFC;  /* Near-white */
+  --secondary-text: #94A3B8;/* Slate / blue-gray */
+  --muted-text: #64748B;    /* Muted slate */
+
+  /* Accents */
+  --accent: #3B82F6;        /* Primary blue */
+  --accent-hover: #2563EB;
+  --accent-text: #FFFFFF;
+  --secondary: #6366F1;     /* Secondary indigo */
+
+  /* Status */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+}
+
+/* Base resets & utilities */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-page text-primary-text antialiased selection:bg-accent/20 selection:text-accent;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    scroll-behavior: smooth;
+  }
+}
