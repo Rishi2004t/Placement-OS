@@ -20,7 +20,6 @@ export function PreparationSystem() {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setExpandedId(activePlan.items[0].id)
     } else if (!activePlan && !expandedId) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setExpandedId(demoData.preparationAreas[3].id)
     }
   }, [activePlan, expandedId])
@@ -42,7 +41,6 @@ export function PreparationSystem() {
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
-          {/* Left Column: Intro & Framework */}
           <div className="lg:col-span-5 flex flex-col gap-12 lg:sticky lg:top-32">
             <div>
               <Badge variant="outline" className="mb-4">PREPARATION PLAN</Badge>
@@ -67,7 +65,6 @@ export function PreparationSystem() {
               )}
             </div>
 
-            {/* Framework Flow - Connected Loop */}
             {!activePlan && (
               <div className="flex flex-col gap-8 relative p-6 bg-surface/50 border border-border/80 rounded-2xl shadow-sm">
                 <div className="absolute left-[41px] top-10 bottom-10 w-px bg-border/80 hidden sm:block" />
@@ -100,7 +97,6 @@ export function PreparationSystem() {
             )}
           </div>
 
-          {/* Right Column: Preparation Areas */}
           <div className="lg:col-span-7 flex flex-col gap-4 w-full max-w-2xl mx-auto lg:mx-0">
             <h3 className="text-[11px] font-bold tracking-widest text-muted-text uppercase mb-2">
               {activePlan ? "Focus Next" : "Your Preparation Areas"}

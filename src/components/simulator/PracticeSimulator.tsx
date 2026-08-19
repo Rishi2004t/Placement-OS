@@ -45,7 +45,6 @@ export function PracticeSimulator() {
     if (selectedPracticeTopic) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       handleTopicSelect(selectedPracticeTopic)
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedPracticeTopic(null) // Reset after consuming
     }
   }, [selectedPracticeTopic, handleTopicSelect, setSelectedPracticeTopic])

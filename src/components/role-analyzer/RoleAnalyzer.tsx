@@ -88,7 +88,6 @@ export function RoleAnalyzer() {
       items: planItems
     })
 
-    // Scroll to preparation section
     document.getElementById("preparation")?.scrollIntoView({ behavior: "smooth" })
   }
 
@@ -97,7 +96,6 @@ export function RoleAnalyzer() {
       <Container>
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-stretch">
           
-          {/* Left Column: Intro & Input */}
           <div className="flex-1 w-full max-w-xl flex flex-col justify-between">
             <div className="mb-8">
               <Badge variant="outline" className="mb-4">SKILL GAP ANALYSIS</Badge>
@@ -181,7 +179,6 @@ export function RoleAnalyzer() {
             </div>
           </div>
 
-          {/* Right Column: Results */}
           <div className="flex-1 w-full flex flex-col">
             <div className="flex-1 bg-elevated/40 border border-border/80 rounded-2xl p-1 shadow-xl flex flex-col">
               {/* Header */}
@@ -248,7 +245,6 @@ export function RoleAnalyzer() {
                       {result && (
                         <div className="flex flex-col gap-6">
                           
-                          {/* Match Header */}
                           <div className="flex items-center justify-between p-4 rounded-xl bg-surface border border-border/80 shadow-sm relative overflow-hidden">
                             <div className="absolute top-0 left-0 w-1 h-full bg-accent" />
                             <div className="flex flex-col">
@@ -262,7 +258,6 @@ export function RoleAnalyzer() {
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {/* Strong */}
                             <div className="flex flex-col gap-3 p-4 rounded-xl bg-surface/50 border border-success/20">
                               <span className="text-[10px] font-bold text-success uppercase tracking-widest flex items-center gap-1.5">
                                 <CheckCircle2 className="h-3.5 w-3.5" /> Matched Skills
@@ -279,7 +274,6 @@ export function RoleAnalyzer() {
                               </div>
                             </div>
 
-                            {/* Needs Attention */}
                             <div className="flex flex-col gap-3 p-4 rounded-xl bg-surface/50 border border-warning/20">
                               <span className="text-[10px] font-bold text-warning uppercase tracking-widest flex items-center gap-1.5">
                                 <AlertTriangle className="h-3.5 w-3.5" /> Skill Gaps
@@ -297,7 +291,6 @@ export function RoleAnalyzer() {
                             </div>
                           </div>
 
-                          {/* Recommended Next */}
                           {result.recommendedNext.length > 0 && (
                             <div className="flex flex-col gap-3 p-4 rounded-xl bg-surface/80 border border-border shadow-sm mt-2 relative overflow-hidden">
                               <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none" />
@@ -316,7 +309,6 @@ export function RoleAnalyzer() {
                             </div>
                           )}
 
-                          {/* BUILD PREPARATION PLAN CTA */}
                           <div className="mt-4">
                             <Button 
                               variant="primary" 
