@@ -1,5 +1,7 @@
 # PlacementOS
 
+[Live Demo](https://placement-os-eight-cyan.vercel.app/)
+
 PlacementOS is a focused placement-preparation product experience that helps students move from a target job role to skill gaps, preparation priorities, and placement readiness.
 
 ## The Problem
@@ -21,9 +23,11 @@ Job Description
 ↓
 Skill Gap
 ↓
-Preparation Priority
+Preparation Plan
 ↓
-Readiness
+Practice
+↓
+Readiness Update
 ↓
 Next Action
 
@@ -46,18 +50,38 @@ An interactive tool that parses a job description and compares it against a samp
 - Lists strong skills, skills needing attention, and recommended next steps based on the identified gaps.
 
 ### 5. Preparation System
-A four-step framework (Learn, Practice, Track, Improve) paired with interactive preparation area cards. Expanding a card reveals the candidate's current readiness in that subject, priority level, specific focus topics, and a recommended action.
+A framework paired with interactive preparation area cards. The Preparation System can now receive a preparation plan generated from the detected skill gaps. The plan provides:
+- Priority
+- Focus topics
+- Recommended action
+- Practice Now action
 
-### 6. Placement Readiness
-A bold visualization of the candidate's overall readiness using a circular progress indicator. Accompanied by a clear visual hierarchy of skill breakdowns and a "Focus Next" panel that prioritizes the top three weakest areas.
+### 6. Practice Simulator
+A deterministic local practice simulator with:
+- DSA
+- SQL
+- DBMS
+- Computer Networks
+- Operating Systems
 
-### 7. Final CTA
+Each topic features local practice questions, answer validation, detailed explanations, score calculation, completion state, and practice-again/reset behavior. 
+
+### 7. Placement Readiness
+A bold visualization of the candidate's overall readiness using a circular progress indicator. Practice results update the local readiness state deterministically in real-time. Accompanied by a clear visual hierarchy of skill breakdowns and a "Focus Next" panel.
+
+### 8. Final CTA
 The concluding conversion section, guiding the user to either "Build My Placement Plan" or "Analyze a Role" (both anchoring back to the Role Analyzer experience).
 
 ## Key Features
 
 - Interactive job-description analysis
 - Deterministic skill-gap analysis
+- Dynamic preparation-plan generation
+- Practice Simulator
+- Topic-based practice questions
+- Practice score calculation
+- Practice-to-readiness integration
+- Shared frontend application state
 - Preparation-area interaction (accordions)
 - Readiness visualization
 - Focus-next recommendations
@@ -78,38 +102,25 @@ The concluding conversion section, guiding the user to either "Build My Placemen
 ```text
 src/
 ├── app/
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── page.tsx
 ├── components/
 │   ├── command-center/
-│   │   └── PlacementCommandCenter.tsx
 │   ├── cta/
-│   │   └── FinalCTA.tsx
 │   ├── hero/
-│   │   └── Hero.tsx
 │   ├── layout/
-│   │   ├── Footer.tsx
-│   │   └── Navbar.tsx
 │   ├── preparation/
-│   │   └── PreparationSystem.tsx
 │   ├── problem/
-│   │   └── PlacementProblem.tsx
 │   ├── product-showcase/
-│   │   └── ProductShowcase.tsx
 │   ├── readiness/
-│   │   └── PlacementReadiness.tsx
 │   ├── role-analyzer/
-│   │   └── RoleAnalyzer.tsx
-│   └── ui/
-│       ├── Badge.tsx
-│       ├── Button.tsx
-│       ├── Container.tsx
-│       └── Surface.tsx
+│   ├── simulator/
+│   ├── ui/
+│   └── workflow/
 ├── data/
-│   └── demo.ts
+│   ├── demo.ts
+│   └── questions.ts
 └── lib/
     ├── skillAnalyzer.ts
+    ├── store.tsx
     └── utils.ts
 ```
 
@@ -126,7 +137,12 @@ src/
 - **Product showcase interaction**: Local state tab switching without page reloads.
 - **Sample role interaction**: One-click population of a mock JD.
 - **Analyze Role**: Controlled delay to simulate processing, transitioning to a results view.
-- **Preparation accordion**: Only one card expands at a time, displaying detailed action plans.
+- **Build Preparation Plan**: Dynamically generates targeted actions based on analyzed skill gaps.
+- **Practice Now topic selection**: Auto-scrolls and pre-selects the corresponding topic in the simulator.
+- **Practice question flow**: Interactive quiz with answer validation, score calculation, and explanations.
+- **Practice Again**: Resets practice state for continuous learning.
+- **Practice → readiness update**: Completing a quiz deterministically updates the global readiness score and progress bars.
+- **New-role replacement**: Analyzing a new role gracefully replaces the previous preparation plan.
 - **Readiness visualization**: SVG circle progress animation on scroll into view.
 
 ## Responsive Design
@@ -156,7 +172,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Production Verification
 
-This project passes strict linting and type-checking requirements:
+This project passes strict linting and type-checking requirements locally:
 ```bash
 pnpm run lint
 pnpm run build
@@ -178,12 +194,12 @@ All candidate statistics, readiness values, and skill breakdowns shown in the in
 
 The following features are conceptually part of the product vision but are intentionally NOT implemented in this frontend assignment:
 - Authentication & persistent user profiles
-- Backend persistence / Database
+- Backend persistence / database
 - Real job ingestion APIs
-- AI-assisted skill extraction (NLP)
-- Personalized, dynamic preparation plans
+- AI-assisted skill extraction
 - Company-specific preparation
-- Real interview practice engine
+- Persistent practice history
+- Real interview simulation with company-specific questions
 
 ## License
 
