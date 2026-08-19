@@ -9,21 +9,27 @@ import { PlacementReadiness } from "@/components/readiness/PlacementReadiness"
 import { FinalCTA } from "@/components/cta/FinalCTA"
 import { Footer } from "@/components/layout/Footer"
 
+import { AppStateProvider } from "@/lib/store"
+import { PracticeSimulator } from "@/components/simulator/PracticeSimulator"
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col" id="top">
-      <Navbar />
-      <main className="flex-1">
-        <Hero />
-        <PlacementProblem />
-        <PlacementWorkflow />
-        <ProductShowcase />
-        <RoleAnalyzer />
-        <PreparationSystem />
-        <PlacementReadiness />
-        <FinalCTA />
-      </main>
-      <Footer />
-    </div>
+    <AppStateProvider>
+      <div className="flex min-h-screen flex-col" id="top">
+        <Navbar />
+        <main className="flex-1">
+          <Hero />
+          <PlacementProblem />
+          <PlacementWorkflow />
+          <ProductShowcase />
+          <RoleAnalyzer />
+          <PreparationSystem />
+          <PracticeSimulator />
+          <PlacementReadiness />
+          <FinalCTA />
+        </main>
+        <Footer />
+      </div>
+    </AppStateProvider>
   )
 }

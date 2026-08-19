@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container"
 import { Button } from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge"
 import { analyzeJobDescription, type AnalysisResult } from "@/lib/skillAnalyzer"
+import { useAppState } from "@/lib/store"
 
 const SAMPLE_JD = `Software Engineer
 
@@ -30,6 +31,7 @@ export function RoleAnalyzer() {
     if (!input.trim()) return
 
     setState("ANALYZING")
+    setActivePlan(null)
     
     // Controlled delay for perceived interaction
     setTimeout(() => {
@@ -47,10 +49,47 @@ export function RoleAnalyzer() {
     setInput("")
     setResult(null)
     setState("IDLE")
+    setActivePlan(null)
   }
 
   const handleSample = () => {
     setInput(SAMPLE_JD)
+  }
+
+  const { setActivePlan } = useAppState()
+
+  const handleBuildPlan = () => {
+    if (!result) return
+
+    const planItems = result.needsAttention.map((skill, index) => {
+      // Deterministic priority based on index (first few are high)
+      const priority = index < 2 ? "High" : "Medium"
+      
+      // Map known skills to Practice Simulator topics
+      let topicId = "dsa" // default
+      if (skill === "SQL" || skill === "Database Management" || skill === "DBMS") topicId = "sql"
+      else if (skill === "Operating Systems") topicId = "os"
+      else if (skill === "Computer Networks") topicId = "cn"
+      else if (skill === "Data Structures" || skill === "Algorithms") topicId = "dsa"
+      else if (skill === "System Design") topicId = "sysdesign"
+
+      return {
+        id: `plan_${index}`,
+        topicId,
+        name: skill,
+        priority: priority as "High" | "Medium" | "Low",
+        focusTopics: [`${skill} fundamentals`, `Advanced ${skill} concepts`],
+        recommendedAction: `Revise core concepts and practice questions`
+      }
+    })
+
+    setActivePlan({
+      targetRole: result.jobTitle,
+      items: planItems
+    })
+
+    // Scroll to preparation section
+    document.getElementById("preparation")?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
@@ -276,6 +315,22 @@ export function RoleAnalyzer() {
                               </div>
                             </div>
                           )}
+
+                          {/* BUILD PREPARATION PLAN CTA */}
+                          <div className="mt-4">
+                            <Button 
+                              variant="primary" 
+                              size="lg" 
+                              className="w-full font-bold shadow-md"
+                              onClick={handleBuildPlan}
+                            >
+                              Build Preparation Plan
+                            </Button>
+                            <p className="text-xs text-center text-muted-text mt-3">
+                              Use these skill gaps to determine what to prepare next.
+                            </p>
+                          </div>
+
                         </div>
                       )}
                     </motion.div>

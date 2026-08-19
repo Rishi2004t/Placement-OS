@@ -7,14 +7,16 @@ import { ShieldAlert, Crosshair, TrendingUp, Target } from "lucide-react"
 import { Container } from "@/components/ui/Container"
 import { Surface } from "@/components/ui/Surface"
 import { Badge } from "@/components/ui/Badge"
-import { demoData } from "@/data/demo"
+import { useAppState } from "@/lib/store"
 
 export function PlacementReadiness() {
+  const { readinessScore, preparationAreas } = useAppState()
+
   // Sort areas by score to create visual hierarchy (lowest first)
-  const sortedAreas = [...demoData.preparationAreas].sort((a, b) => a.score - b.score)
+  const sortedAreas = [...preparationAreas].sort((a, b) => a.score - b.score)
   
   // Extract top 3 highest priority items for "Focus Next"
-  const focusNext = demoData.preparationAreas
+  const focusNext = preparationAreas
     .filter(area => area.priority === "High" || area.priority === "Medium")
     .sort((a, b) => {
       if (a.priority === "High" && b.priority !== "High") return -1
@@ -77,7 +79,7 @@ export function PlacementReadiness() {
                     strokeLinecap="round"
                     className="text-accent drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
                     initial={{ strokeDasharray: "0 276.5" }}
-                    whileInView={{ strokeDasharray: `${(demoData.readinessScore / 100) * 276.5} 276.5` }}
+                    whileInView={{ strokeDasharray: `${(readinessScore / 100) * 276.5} 276.5` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
                   />
@@ -92,7 +94,7 @@ export function PlacementReadiness() {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="text-6xl sm:text-7xl font-bold tracking-tighter text-primary-text drop-shadow-sm"
                 >
-                  {demoData.readinessScore}%
+                  {readinessScore}%
                 </motion.span>
                 <span className="text-[10px] font-medium text-muted-text uppercase tracking-widest bg-elevated px-2 py-0.5 rounded-full mt-4 border border-border">
                   Live Profile Analysis

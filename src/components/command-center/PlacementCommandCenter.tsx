@@ -4,8 +4,11 @@ import * as React from "react"
 import { motion } from "framer-motion"
 import { Activity, Target, ShieldCheck, Circle, TrendingUp } from "lucide-react"
 import { demoData } from "@/data/demo"
+import { useAppState } from "@/lib/store"
 
 export function PlacementCommandCenter() {
+  const { readinessScore } = useAppState()
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -47,7 +50,7 @@ export function PlacementCommandCenter() {
               <span className="text-[10px] font-bold tracking-widest text-muted-text uppercase">Readiness</span>
               <div className="flex items-center gap-2 mt-1">
                 <ShieldCheck className="h-4 w-4 text-success" />
-                <span className="text-sm font-bold text-primary-text">{demoData.readinessScore}%</span>
+                <span className="text-sm font-bold text-primary-text">{readinessScore}%</span>
               </div>
             </div>
           </div>
